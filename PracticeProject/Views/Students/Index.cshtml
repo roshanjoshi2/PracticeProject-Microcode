@@ -1,0 +1,88 @@
+﻿@model IEnumerable<PracticeProject.Models.Student>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th></th>
+            <th>
+                @Html.DisplayNameFor(model => model.DOB)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Citizenshipnumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Fathersname)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Mothersname)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Occupation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Contact)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Address)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var student in Model) {
+            var profileSrc = string.IsNullOrEmpty(student.ProfileImagePath)
+            ? "/images/person.jpg"
+            : student.ProfileImagePath;
+        <tr>
+            <td><img src="@profileSrc" height="50"/></td>
+            <td>
+                @Html.DisplayFor(modelItem => student.DOB)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => student.Citizenshipnumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => student.Fathersname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => student.Mothersname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => student.Occupation)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => student.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => student.Contact)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => student.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => student.Address)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@student.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@student.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@student.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
