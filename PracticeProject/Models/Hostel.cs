@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PracticeProject.Models
 {
@@ -13,5 +14,7 @@ namespace PracticeProject.Models
 
         public int StudentID { get; set; }
         public Student? Student { get; set; }
+
+      
     }
 }

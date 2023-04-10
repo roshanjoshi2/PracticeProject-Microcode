@@ -23,9 +23,9 @@ namespace PracticeProject.Controllers
         // GET: Students
         public async Task<IActionResult> Index()
         {
-              return _context.Student != null?
-              View(await _context.Student.ToListAsync()) :
-              Problem("Entity set 'CCDbContext.Student'  is null.");
+            return _context.Student != null ?
+            View(await _context.Student.ToListAsync()) :
+            Problem("Entity set 'CCDbContext.Student'  is null.");
         }
 
         // GET: Students/Details/5
@@ -61,17 +61,19 @@ namespace PracticeProject.Controllers
         {
 
 
+
             
-            if (ModelState.IsValid)
-            {
-   
-                var relativePath = await SaveProfileImage(student.ProfileImage);
+                string? relativePath = SaveProfileImage(student.ProfileImage);
                 student.ProfileImagePath = relativePath;
                 _context.Add(student);
                 await _context.SaveChangesAsync();
+
+               
                 return RedirectToAction(nameof(Index));
-            }
-            return View(student);
+
+                
+           
+
         }
 
         // GET: Students/Edit/5
@@ -168,7 +170,7 @@ namespace PracticeProject.Controllers
         }
 
 
-        private async Task<string> SaveProfileImage(IFormFile profileimage)
+        private  string SaveProfileImage(IFormFile profileimage)
         {
             
 
@@ -179,7 +181,7 @@ namespace PracticeProject.Controllers
             var fullFilePath = Path.Combine(currentAppPath, $"wwwroot/{relativePath}");
 
             var stream = System.IO.File.Create(fullFilePath);
-            await profileimage.CopyToAsync(stream);
+             profileimage.CopyToAsync(stream);
 
             return relativePath;
         }
