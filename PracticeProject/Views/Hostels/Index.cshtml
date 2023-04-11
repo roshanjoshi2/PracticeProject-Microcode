@@ -12,6 +12,7 @@
 <table class="table">
     <thead>
         <tr>
+            <th></th>
             <th>
                 @Html.DisplayNameFor(model => model.Emptyseats)
             </th>
@@ -41,7 +42,11 @@
     </thead>
     <tbody>
 @foreach (var item in Model) {
+            var profileSrc = string.IsNullOrEmpty(item.ProfileImagePath)
+            ? "/images/person.jpg"
+            : item.ProfileImagePath;
         <tr>
+            <td><img src="@profileSrc" height="40px"></td>
             <td>
 
                 @Html.DisplayFor(modelItem => item.Emptyseats)

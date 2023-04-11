@@ -59,10 +59,12 @@ namespace PracticeProject.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,Emptyseats,Totalseats,PAN,StudentID,Name,Contact,Email,Address")] Hostel hostel)
+        public async Task<IActionResult> Create(Hostel hostel)
         {
             if (ModelState.IsValid)
             {
+                string? relativePath = SaveProfileImage(hostel.ProfileImage);
+                hostel.ProfileImagePath = relativePath;
                 _context.Add(hostel);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -165,6 +167,21 @@ namespace PracticeProject.Controllers
         private bool HostelExists(int id)
         {
           return (_context.Hostel?.Any(e => e.ID == id)).GetValueOrDefault();
+        }
+        private string SaveProfileImage(IFormFile profileimage)
+        {
+
+
+            var fileName = profileimage.FileName;   //38b7feaa-39d3-4ead-aeeb-ee7dff72cd4a_person.jpg
+            var uniqueFileName = $"{Guid.NewGuid()}_{fileName}";
+            var relativePath = $"/images/profiles/{uniqueFileName}";
+            var currentAppPath = Directory.GetCurrentDirectory();
+            var fullFilePath = Path.Combine(currentAppPath, $"wwwroot/{relativePath}");
+
+            var stream = System.IO.File.Create(fullFilePath);
+            profileimage.CopyToAsync(stream);
+
+            return relativePath;
         }
     }
 }

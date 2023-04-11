@@ -18,7 +18,7 @@ namespace PracticeProject
             modelBuilder.Entity<Hostel>().HasIndex(e => e.PAN).IsUnique();
             modelBuilder.Entity<Hostel>().Property(r => r.Email).IsRequired();
             modelBuilder.Entity<Student>().HasIndex(cit => cit.Citizenshipnumber).IsUnique();
-
+            
         }
 
 

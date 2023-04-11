@@ -15,6 +15,10 @@ namespace PracticeProject.Models
         public int StudentID { get; set; }
         public Student? Student { get; set; }
 
-      
+        [NotMapped]
+        public IFormFile ProfileImage { get; set; }
+        public string? ProfileImagePath { get; set; }
+
+
     }
 }

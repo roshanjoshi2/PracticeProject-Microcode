@@ -15,6 +15,11 @@ namespace PracticeProject.Models
         public string Fathersname { get; set; }
         public string Mothersname { get; set; }
         public string Occupation { get; set; }
+
+        //public int HostelID { get; set; }
+        //public Hostel? Hostel { get; set; }
+
+
         [NotMapped]
         public IFormFile ProfileImage { get; set; }
         public string? ProfileImagePath { get; set; }
